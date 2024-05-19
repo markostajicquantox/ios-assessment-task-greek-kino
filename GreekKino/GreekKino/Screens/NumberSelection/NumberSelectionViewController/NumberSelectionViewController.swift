@@ -139,6 +139,7 @@ class NumberSelectionViewController: UIViewController {
             .sink { [weak self] remainingTime in
                 guard let self = self, let remainingTime = remainingTime else { return }
                 if remainingTime <= 0 {
+                    self.remainingTimeLabel.style = .secondaryDestructive
                     self.remainingTimeLabel.text = Localized.NumberSelection.remainingTimeNoTimeLeft
                     self.checkoutButton.isEnabled = false
                     self.clearSelectionButton.isEnabled = false
@@ -146,6 +147,7 @@ class NumberSelectionViewController: UIViewController {
                     self.randomSelectionButton.isEnabled = false
                     self.stakeSelectionButton.isEnabled = false
                 } else {
+                    self.remainingTimeLabel.style = .secondaryDark
                     self.remainingTimeLabel.text = Localized.NumberSelection.remainingTime + " \(remainingTime.toMinuteSecondString())"
                     self.checkoutButton.isEnabled = true
                     self.clearSelectionButton.isEnabled = true
