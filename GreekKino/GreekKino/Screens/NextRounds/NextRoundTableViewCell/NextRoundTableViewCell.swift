@@ -72,20 +72,23 @@ class NextRoundTableViewCell: UITableViewCell {
     func configure(with item: NextRoundCellItem) {
         self.item = item
         
-        // TODO: Normally i would avoid concatenating the placeholder strings (data key) and data value labels, but to save time i opted for this way
+        // TODO: Normally I would avoid concatenating the placeholder strings (data key) and data value labels, but to save time I opted for this way
         drawIdLabel.text = Localized.NextRounds.round + " \(item.id)"
         startTimeLabel.text = Localized.NextRounds.starts + " \(item.startTime)"
         
         if item.remainingTime <= 0 {
             setupLabelStyling(isEnabled: false)
+            remainingTimeLabel.style = .primaryDestructive
             remainingTimeLabel.text = Localized.NextRounds.noTimeLeft
             backgroundHolderView.backgroundColor = .disabledCardBackground
             startingSoonLabel.isHidden = true
         } else if item.remainingTime <= 60 {
+            remainingTimeLabel.style = .primaryDark
             remainingTimeLabel.text = "\(item.remainingTime.toMinuteSecondString())"
             startBlinkingAnimation()
             startingSoonLabel.isHidden = false
         } else {
+            remainingTimeLabel.style = .primaryDark
             remainingTimeLabel.text = "\(item.remainingTime.toMinuteSecondString())"
             backgroundHolderView.backgroundColor = .cardBackground
             startingSoonLabel.isHidden = true
