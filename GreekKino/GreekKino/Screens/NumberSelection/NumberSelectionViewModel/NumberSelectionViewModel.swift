@@ -85,8 +85,8 @@ class NumberSelectionViewModel {
         }
     }
     
-    func setDeposit(_ deposit: Double?, selectedNumbersCount: Int) {
-        guard let deposit = deposit else {
+    func setStake(_ stake: Double?, selectedNumbersCount: Int) {
+        guard let stake = stake else {
             if let odd = GKConstants.odds.first(where: { $0.number == selectedNumbersCount }) {
                 self.oddSubject.value = odd.odd
             } else if selectedNumbersCount != 0 {
@@ -104,7 +104,7 @@ class NumberSelectionViewModel {
             self.prizeSubject.value = nil
         } else if let odd = GKConstants.odds.first(where: { $0.number == selectedNumbersCount }) {
             self.oddSubject.value = odd.odd
-            self.prizeSubject.value = odd.odd * deposit
+            self.prizeSubject.value = odd.odd * stake
         } else {
             let combinationCount = CombinationCalculator(n: selectedNumbersCount, k: GKConstants.odds.count).combinations()
             guard let maxOdd = GKConstants.odds.compactMap({ $0.odd }).max() else {
@@ -114,7 +114,7 @@ class NumberSelectionViewModel {
             }
             let odd = maxOdd / combinationCount
             self.oddSubject.value = odd
-            self.prizeSubject.value = odd * deposit
+            self.prizeSubject.value = odd * stake
         }
     }
 }

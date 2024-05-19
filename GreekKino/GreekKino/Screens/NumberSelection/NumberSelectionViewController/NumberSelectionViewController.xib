@@ -14,12 +14,12 @@
                 <outlet property="clearSelectionButton" destination="7ft-cG-cIR" id="faD-tQ-Rg4"/>
                 <outlet property="collectionView" destination="c8w-uw-IHo" id="jR0-FR-FAt"/>
                 <outlet property="collectionViewHeightConstraint" destination="HZH-XB-qlW" id="n1b-Ia-jsa"/>
-                <outlet property="depositSelectionButtonContainer" destination="cVr-rN-HVT" id="SeW-lF-Ufs"/>
                 <outlet property="oddInfoLabel" destination="Qav-m0-uMu" id="ghh-WC-7Xt"/>
                 <outlet property="prizeInfoLabel" destination="p5j-Kh-AVD" id="Hu5-0H-Cf9"/>
                 <outlet property="randomSelectionButtonContainer" destination="kgG-Vh-PgY" id="xIV-II-A0c"/>
                 <outlet property="remainingTimeLabel" destination="iX3-EX-9Si" id="Kha-v3-x6W"/>
                 <outlet property="selectedItemLabel" destination="TxH-Y8-E1h" id="mu8-RT-E0C"/>
+                <outlet property="stakeSelectionButtonContainer" destination="cVr-rN-HVT" id="SeW-lF-Ufs"/>
                 <outlet property="view" destination="bs5-DL-DT7" id="7dk-mr-Lsp"/>
             </connections>
         </placeholder>

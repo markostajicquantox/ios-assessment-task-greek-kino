@@ -16,7 +16,7 @@ struct RandomSelectionElement: Pickable {
     var value: Int
 }
 
-struct CashDeposit: Pickable {
+struct CashStake: Pickable {
     var title: String
     var value: Int
 }

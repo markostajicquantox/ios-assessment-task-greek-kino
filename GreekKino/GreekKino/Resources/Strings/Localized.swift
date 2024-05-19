@@ -34,7 +34,7 @@ enum Localized {
         static let remainingTimeNoTimeLeft = String(localized: "RemainingTimeNoTimeLeft")
         static let remainingTime = String(localized: "RemainingTime")
         static let randomSelection = String(localized: "RandomSelection")
-        static let deposit = String(localized: "Deposit")
+        static let stake = String(localized: "Stake")
         static let random = String(localized: "Random")
         static let number = String(localized: "Number")
         static let numbers = String(localized: "Numbers")

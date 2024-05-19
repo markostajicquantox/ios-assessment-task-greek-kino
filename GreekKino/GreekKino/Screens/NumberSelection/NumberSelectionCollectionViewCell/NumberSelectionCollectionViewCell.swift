@@ -42,8 +42,10 @@ class NumberSelectionCollectionViewCell: UICollectionViewCell {
     // MARK: - Private methods
 
     private func setupViews() {
-        numberLabel.style = .numberSelection
+        containerView.layer.borderWidth = 3
+        numberLabel.style = .semiboldDark
         containerView.backgroundColor = .clear
+        containerView.layer.borderColor = UIColor.clear.cgColor
     }
         
     // MARK: - Public methods
@@ -51,7 +53,6 @@ class NumberSelectionCollectionViewCell: UICollectionViewCell {
     func configure(with item: NumberSelectionItem) {
         self.item = item
         numberLabel.text = String(item.number)
-        containerView.layer.borderWidth = 3
         containerView.backgroundColor = item.isSelected ? UIColor.border : UIColor.clear
         containerView.layer.borderColor = item.isSelected ? UIColor.random.cgColor : UIColor.clear.cgColor
     }

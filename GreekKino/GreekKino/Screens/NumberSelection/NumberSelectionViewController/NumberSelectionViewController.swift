@@ -10,7 +10,7 @@ import Combine
 class NumberSelectionViewController: UIViewController {
     @IBOutlet private weak var collectionView: UICollectionView!
     @IBOutlet private weak var selectedItemLabel: UILabel!
-    @IBOutlet private weak var depositSelectionButtonContainer: UIView!
+    @IBOutlet private weak var stakeSelectionButtonContainer: UIView!
     @IBOutlet private weak var randomSelectionButtonContainer: UIView!
     @IBOutlet private weak var prizeInfoLabel: UILabel!
     @IBOutlet private weak var remainingTimeLabel: UILabel!
@@ -24,15 +24,15 @@ class NumberSelectionViewController: UIViewController {
     private weak var coordinator: MainCoordinator?
     private var viewModel: NumberSelectionViewModel
     private var randomSelectionButton: PickerButton<RandomSelectionElement>!
-    private var depositSelectionButton: PickerButton<CashDeposit>!
+    private var stakeSelectionButton: PickerButton<CashStake>!
     private var cancellables = Set<AnyCancellable>()
     private var dataSource: UICollectionViewDiffableDataSource<Int, NumberSelectionItem>!
-    private var deposit: Double?
+    private var stake: Double?
     private var selectedItems: [NumberSelectionItem] = [] {
         didSet {
             let numbers = selectedItems.map { $0.number }.map { String($0) }.joined(separator: ", ")
             selectedItemLabel.text = Localized.NumberSelection.selectedNumbers + " \(numbers)"
-            viewModel.setDeposit(deposit, selectedNumbersCount: selectedItems.count)
+            viewModel.setStake(stake, selectedNumbersCount: selectedItems.count)
         }
     }
     private var items = GKConstants.possibleNumbers.compactMap { NumberSelectionItem(number: $0, isSelected: false, onSelect: nil) }
@@ -59,7 +59,7 @@ class NumberSelectionViewController: UIViewController {
         setupViews()
         setItemsSelectAction()
         setRandomSelectionButton()
-        setDepositSelectionButton()
+        setStakeSelectionButton()
         setupCollectionView()
         configureDataSource()
         updateDataSource()
@@ -100,7 +100,7 @@ class NumberSelectionViewController: UIViewController {
                 guard let self = self, let time = time else { return }
                 let timeLabel = UILabel()
                 timeLabel.style = .primaryNavigation
-                timeLabel.text = time
+                timeLabel.text = "⏱️" + " \(time)"
                 navigationItem.rightBarButtonItem = UIBarButtonItem(customView: timeLabel)
             }.store(in: &cancellables)
 
@@ -131,7 +131,7 @@ class NumberSelectionViewController: UIViewController {
                     self.prizeInfoLabel.text = Localized.NumberSelection.potentialPrize
                     return
                 }
-                self.prizeInfoLabel.text = Localized.NumberSelection.potentialPrize + " \(String(format: "%.2f", prize))" + " " + GKConstants.depositCurrency
+                self.prizeInfoLabel.text = Localized.NumberSelection.potentialPrize + " \(String(format: "%.2f", prize))" + " " + GKConstants.stakeCurrency
             }.store(in: &cancellables)
         
         viewModel.remainingTimePublisher
@@ -144,14 +144,14 @@ class NumberSelectionViewController: UIViewController {
                     self.clearSelectionButton.isEnabled = false
                     self.collectionView.isUserInteractionEnabled = false
                     self.randomSelectionButton.isEnabled = false
-                    self.depositSelectionButton.isEnabled = false
+                    self.stakeSelectionButton.isEnabled = false
                 } else {
                     self.remainingTimeLabel.text = Localized.NumberSelection.remainingTime + " \(remainingTime.toMinuteSecondString())"
                     self.checkoutButton.isEnabled = true
                     self.clearSelectionButton.isEnabled = true
                     self.collectionView.isUserInteractionEnabled = true
                     self.randomSelectionButton.isEnabled = true
-                    self.depositSelectionButton.isEnabled = true
+                    self.stakeSelectionButton.isEnabled = true
                 }
             }.store(in: &cancellables)
     }
@@ -166,15 +166,15 @@ class NumberSelectionViewController: UIViewController {
     
     private func setupViews() {
         selectedItemLabel.style = .primaryDark
-        prizeInfoLabel.style = .secondaryDark
+        prizeInfoLabel.style = .semiboldDark
         oddInfoLabel.style = .secondaryDark
         remainingTimeLabel.style = .secondaryDark
         randomSelectionButtonContainer.backgroundColor = .blinking
-        depositSelectionButtonContainer.backgroundColor = .blinking
+        stakeSelectionButtonContainer.backgroundColor = .blinking
         randomSelectionButtonContainer.layer.cornerRadius = 8
-        depositSelectionButtonContainer.layer.cornerRadius = 8
+        stakeSelectionButtonContainer.layer.cornerRadius = 8
         randomSelectionButtonContainer.clipsToBounds = true
-        depositSelectionButtonContainer.clipsToBounds = true
+        stakeSelectionButtonContainer.clipsToBounds = true
         clearSelectionButton.layer.cornerRadius = 8
         clearSelectionButton.clipsToBounds = true
         clearSelectionButton.setTitleColor(.white, for: .normal)
@@ -227,19 +227,19 @@ class NumberSelectionViewController: UIViewController {
         })
     }
     
-    private func setDepositSelectionButton() {
-        depositSelectionButton = PickerButton(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width - 32, height: 50))
-        depositSelectionButton.setTitle(Localized.NumberSelection.deposit, for: .normal)
-        depositSelectionButton.fixInView(depositSelectionButtonContainer)
+    private func setStakeSelectionButton() {
+        stakeSelectionButton = PickerButton(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width - 32, height: 50))
+        stakeSelectionButton.setTitle(Localized.NumberSelection.stake, for: .normal)
+        stakeSelectionButton.fixInView(stakeSelectionButtonContainer)
         
-        let depositDataSource = GKConstants.possibleDeposits.map { CashDeposit(title: String($0) + " " + GKConstants.depositCurrency, value: $0) }
+        let stakeDataSource = GKConstants.possibleStakes.map { CashStake(title: String($0) + " " + GKConstants.stakeCurrency, value: $0) }
         
-        depositSelectionButton.configure(with: depositDataSource, selectAction: { [weak self] cashDeposit in
-            guard let self = self, let cashDeposit = cashDeposit else { return }
+        stakeSelectionButton.configure(with: stakeDataSource, selectAction: { [weak self] cashStake in
+            guard let self = self, let cashStake = cashStake else { return }
             
-            self.deposit = Double(cashDeposit.value)
-            self.depositSelectionButton.setTitle(cashDeposit.title, for: .normal)
-            self.viewModel.setDeposit(self.deposit, selectedNumbersCount: self.selectedItems.count)
+            self.stake = Double(cashStake.value)
+            self.stakeSelectionButton.setTitle(cashStake.title, for: .normal)
+            self.viewModel.setStake(self.stake, selectedNumbersCount: self.selectedItems.count)
         })
     }
         

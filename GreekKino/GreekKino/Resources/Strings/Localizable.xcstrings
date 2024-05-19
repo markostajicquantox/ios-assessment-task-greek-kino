@@ -10,17 +10,6 @@
     "Clear" : {
       "extractionState" : "manual"
     },
-    "Deposit" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Deposit"
-          }
-        }
-      }
-    },
     "Done" : {
       "extractionState" : "manual"
     },
@@ -216,6 +205,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Selected numbers:"
+          }
+        }
+      }
+    },
+    "Stake" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stake"
           }
         }
       }

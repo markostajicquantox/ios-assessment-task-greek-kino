@@ -37,7 +37,7 @@ extension UILabel: StyleProtocol {
 }
 
 extension Style {
-    static var numberSelection: Style { return Style(font: .semibold, textColor: .text) }
+    static var semiboldDark: Style { return Style(font: .semibold, textColor: .text) }
     static var primaryNavigation: Style { return Style(font: .regular, textColor: .white) }
     static var secondaryNavigation: Style { return Style(font: .light, textColor: .white) }
     static var primaryDark: Style { return Style(font: .regular, textColor: .text) }

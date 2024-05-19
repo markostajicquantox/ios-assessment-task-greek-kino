@@ -9,10 +9,10 @@ import Foundation
 struct GKConstants {
     static let drawLink = "https://mozzartbet.com/sr/lotto-animation/26#"
     static let possibleNumbers = Array(1...80)
-    static let possibleDeposits = [50, 100, 150, 200, 500, 1000, 2000, 5000]
+    static let possibleStakes = [50, 100, 150, 200, 500, 1000, 2000, 5000]
     static let manualSelectionMaximum = 15
     static let randomSelectionMaximum = 8
-    static let depositCurrency = "RSD"
+    static let stakeCurrency = "RSD"
     static let odds: [Odd] = [Odd(number: 1, odd: 3.75),
                               Odd(number: 2, odd: 14.0),
                               Odd(number: 3, odd: 65.0),
