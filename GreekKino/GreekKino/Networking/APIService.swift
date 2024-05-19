@@ -12,7 +12,11 @@ enum APIError: Error {
     case invalidResponse
 }
 
-class APIService {
+protocol APIServiceProtocol {
+    func fetchData<T: Codable>(from urlString: String, completion: @escaping (Result<T, Error>) -> Void)
+}
+
+class APIService: APIServiceProtocol {    
     func fetchData<T: Codable>(from urlString: String, completion: @escaping (Result<T, Error>) -> Void) {
         guard let url = URL(string: urlString) else {
             completion(.failure(APIError.invalidURL))

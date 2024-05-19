@@ -6,21 +6,6 @@
 
 import UIKit
 
-struct GreekKinoRoundCellItem: Hashable, Equatable {
-    let id: Int
-    let time: TimeInterval
-    let text: String
-    var remainingTime: Int
-    
-    static func == (lhs: GreekKinoRoundCellItem, rhs: GreekKinoRoundCellItem) -> Bool {
-        lhs.id == rhs.id && lhs.remainingTime == rhs.remainingTime
-    }
-    
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(id)
-    }
-}
-
 class NextRoundTableViewCell: UITableViewCell {
     @IBOutlet private weak var backgroundHolderView: UIView!
     @IBOutlet private weak var drawIdLabel: UILabel!
@@ -30,7 +15,7 @@ class NextRoundTableViewCell: UITableViewCell {
     
     // MARK: - Private properties
 
-    private var item: GreekKinoRoundCellItem?
+    private var item: NextRoundCellItem?
     
     // MARK: - Lifecycle
     
@@ -84,12 +69,12 @@ class NextRoundTableViewCell: UITableViewCell {
     
     // MARK: - Public methods
 
-    func configure(with item: GreekKinoRoundCellItem) {
+    func configure(with item: NextRoundCellItem) {
         self.item = item
         
         // TODO: Normally i would avoid concatenating the placeholder strings (data key) and data value labels, but to save time i opted for this way
         drawIdLabel.text = Localized.NextRounds.round + " \(item.id)"
-        startTimeLabel.text = Localized.NextRounds.starts + " \(item.text)"
+        startTimeLabel.text = Localized.NextRounds.starts + " \(item.startTime)"
         
         if item.remainingTime <= 0 {
             setupLabelStyling(isEnabled: false)

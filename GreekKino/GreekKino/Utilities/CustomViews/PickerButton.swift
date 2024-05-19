@@ -96,7 +96,6 @@ class PickerButton<T: Pickable>: UIButton, UIPickerViewDataSource, UIPickerViewD
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        // Handle selection
         self.selectedElement = dataSource[row]
     }
 }

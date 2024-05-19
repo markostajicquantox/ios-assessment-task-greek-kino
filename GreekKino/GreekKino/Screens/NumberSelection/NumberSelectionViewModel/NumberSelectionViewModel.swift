@@ -20,7 +20,8 @@ class NumberSelectionViewModel {
     private let prizeSubject = CurrentValueSubject<Double?, Never>(nil)
     private let remainingTimeSubject = CurrentValueSubject<Int?, Never>(nil)
     private var timer: Timer?
-    
+    private let apiService: APIServiceProtocol
+
     // MARK: - Public properties
 
     var infoTitlePublisher: AnyPublisher<String?, Never> {
@@ -47,10 +48,11 @@ class NumberSelectionViewModel {
         remainingTimeSubject.eraseToAnyPublisher()
     }
 
-    // MARK: - Initializer
+    // MARK: - Initialization
 
-    init(greekKinoRoundId: Int) {
+    init(greekKinoRoundId: Int, apiService: APIServiceProtocol = APIService()) {
         self.greekKinoRoundId = greekKinoRoundId
+        self.apiService = apiService
     }
     
     // MARK: - Private methods
@@ -70,7 +72,6 @@ class NumberSelectionViewModel {
     // MARK: - Public methods
     
     func fetchData() {
-        let apiService = APIService()
         let url = "https://api.opap.gr/draws/v3.0/1100/\(greekKinoRoundId)"
         apiService.fetchData(from: url) { [weak self] (result: Result<GreekKinoRound, Error>) in
             switch result {

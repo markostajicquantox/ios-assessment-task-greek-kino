@@ -74,21 +74,21 @@ class MainCoordinator: Coordinator {
         ]
 
         UINavigationBar.appearance().standardAppearance = appearance
-        UINavigationBar.appearance().compactAppearance = appearance  // Optional: Customize for compact state
+        UINavigationBar.appearance().compactAppearance = appearance
         if #available(iOS 15.0, *) {
-            UINavigationBar.appearance().scrollEdgeAppearance = appearance  // Optional: Customize for scroll edge appearance
+            UINavigationBar.appearance().scrollEdgeAppearance = appearance
         }
         
         let navigationBarAppearance = UINavigationBar.appearance()
-        navigationBarAppearance.tintColor = .white // Change back button color to white
+        navigationBarAppearance.tintColor = .white
     }
 
     private func setupTabBarAppearance(for tabBarController: UITabBarController) {
         let tabBarAppearance = UITabBarAppearance()
-        tabBarAppearance.stackedLayoutAppearance.normal.iconColor = .secondaryText  // Color of the icon when unselected
-        tabBarAppearance.stackedLayoutAppearance.normal.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.secondaryText]  // Color of the title when unselected
-        tabBarAppearance.stackedLayoutAppearance.selected.iconColor = .highlight  // Color of the icon when selected
-        tabBarAppearance.stackedLayoutAppearance.selected.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.highlight]  // Color of the title when selected
+        tabBarAppearance.stackedLayoutAppearance.normal.iconColor = .secondaryText
+        tabBarAppearance.stackedLayoutAppearance.normal.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.secondaryText]
+        tabBarAppearance.stackedLayoutAppearance.selected.iconColor = .highlight
+        tabBarAppearance.stackedLayoutAppearance.selected.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.highlight]
 
         tabBarController.tabBar.standardAppearance = tabBarAppearance
         if #available(iOS 15.0, *) {

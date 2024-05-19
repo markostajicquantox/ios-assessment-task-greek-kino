@@ -18,9 +18,9 @@ class NextRoundsViewController: UIViewController {
 
     private weak var delegate: NextRoundsViewControllerDelegate?
     private var viewModel: NextRoundsViewModel
-    private var dataSource: UITableViewDiffableDataSource<Int, GreekKinoRoundCellItem>!
+    private var dataSource: UITableViewDiffableDataSource<Int, NextRoundCellItem>!
     private var timer: Timer?
-    private var roundItems: [GreekKinoRoundCellItem] = []
+    private var roundItems: [NextRoundCellItem] = []
     private var refreshControl = UIRefreshControl()
     private var cancellables = Set<AnyCancellable>()
 
@@ -46,6 +46,12 @@ class NextRoundsViewController: UIViewController {
         configureRefreshControl()
         configureDataSource()
         fetchData()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        title = Localized.TabBar.nextRounds
     }
     
     // MARK: - Private methods
@@ -97,7 +103,7 @@ class NextRoundsViewController: UIViewController {
     }
 
     private func configureDataSource() {
-        dataSource = UITableViewDiffableDataSource<Int, GreekKinoRoundCellItem>(tableView: tableView) { tableView, indexPath, round in
+        dataSource = UITableViewDiffableDataSource<Int, NextRoundCellItem>(tableView: tableView) { tableView, indexPath, round in
             let cell = tableView.dequeueReusableCell(NextRoundTableViewCell.self)
             cell.configure(with: round)
             return cell
@@ -105,7 +111,7 @@ class NextRoundsViewController: UIViewController {
     }
     
     private func updateDataSource() {
-        var snapshot = NSDiffableDataSourceSnapshot<Int, GreekKinoRoundCellItem>()
+        var snapshot = NSDiffableDataSourceSnapshot<Int, NextRoundCellItem>()
         snapshot.appendSections([0])
         snapshot.appendItems(self.roundItems)
         self.dataSource.apply(snapshot, animatingDifferences: false)
