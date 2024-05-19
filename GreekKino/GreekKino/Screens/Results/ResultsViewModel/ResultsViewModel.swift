@@ -14,6 +14,7 @@ class ResultsViewModel {
     private let refreshControlSubject = CurrentValueSubject<Bool?, Never>(nil)
     private let previousRoundsSubject = CurrentValueSubject<[ResultItem]?, Never>(nil)
     private let errorSubject = CurrentValueSubject<String?, Never>(nil)
+    private let apiService: APIServiceProtocol
 
     // MARK: - Public properties
 
@@ -28,12 +29,16 @@ class ResultsViewModel {
     var errorPublisher: AnyPublisher<String?, Never> {
         errorSubject.eraseToAnyPublisher()
     }
+    
+    // MARK: - Initialization
+
+    init(apiService: APIServiceProtocol = APIService()) {
+        self.apiService = apiService
+    }
 
     // MARK: - Public methods
 
-    func fetchData() {
-        let apiService = APIService()
-        let date = Date().resultsDateString()
+    func fetchData(for date: String) {
         let url = "https://api.opap.gr/draws/v3.0/1100/draw-date/\(date)/\(date)"
         apiService.fetchData(from: url) { [weak self] (result: Result<PreviousRoundsResponse, Error>) in
             self?.refreshControlSubject.value = true

@@ -117,6 +117,6 @@ class ResultsViewController: UIViewController {
     
     private func fetchData() {
         showActivityIndicator(style: .large, color: .highlight)
-        viewModel.fetchData()
+        viewModel.fetchData(for: Date().toResultsFormatDateString())
     }
 }

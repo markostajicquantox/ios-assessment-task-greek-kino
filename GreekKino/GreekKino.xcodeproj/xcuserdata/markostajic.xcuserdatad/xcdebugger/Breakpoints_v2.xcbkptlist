@@ -110,39 +110,39 @@
             filePath = "GreekKino/Screens/NextRounds/NextRoundsViewController/NextRoundsViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "76"
-            endingLineNumber = "76"
+            startingLineNumber = "82"
+            endingLineNumber = "82"
             landmarkName = "bindViewModel()"
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "93103AAA-B78C-45C2-BFBE-96D9415DAEF8 - 69bc34819156b341"
+                  uuid = "93103AAA-B78C-45C2-BFBE-96D9415DAEF8 - 1d71c807e6094573"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "closure #3 (Swift.Optional&lt;Swift.String&gt;) -&gt; () in GreekKino.NextRoundsViewController.bindViewModel() -&gt; ()"
+                  symbolName = "GreekKino.NextRoundsViewController.setupViews() -&gt; ()"
                   moduleName = "GreekKino"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/markostajic/Desktop/GreekKino/GreekKino/Screens/NextRounds/NextRoundsViewController/NextRoundsViewController.swift"
+                  urlString = "file:///Users/markostajic/Desktop/ios-assessment-task-greek-kino/GreekKino/GreekKino/Screens/NextRounds/NextRoundsViewController/NextRoundsViewController.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "76"
-                  endingLineNumber = "76"
-                  offsetFromSymbolStart = "344">
+                  startingLineNumber = "82"
+                  endingLineNumber = "82"
+                  offsetFromSymbolStart = "40">
                </Location>
                <Location
-                  uuid = "93103AAA-B78C-45C2-BFBE-96D9415DAEF8 - 69bc34819156b341"
+                  uuid = "93103AAA-B78C-45C2-BFBE-96D9415DAEF8 - aaeec4d5ab49edf1"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "closure #3 (Swift.Optional&lt;Swift.String&gt;) -&gt; () in GreekKino.NextRoundsViewController.bindViewModel() -&gt; ()"
                   moduleName = "GreekKino"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/markostajic/Desktop/GreekKino/GreekKino/Screens/NextRounds/NextRoundsViewController/NextRoundsViewController.swift"
+                  urlString = "file:///Users/markostajic/Desktop/ios-assessment-task-greek-kino/GreekKino/GreekKino/Screens/NextRounds/NextRoundsViewController/NextRoundsViewController.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "76"
-                  endingLineNumber = "76"
+                  startingLineNumber = "82"
+                  endingLineNumber = "82"
                   offsetFromSymbolStart = "292">
                </Location>
             </Locations>
