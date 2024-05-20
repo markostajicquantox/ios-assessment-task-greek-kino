@@ -101,8 +101,14 @@ class MainCoordinator: Coordinator {
 
 extension MainCoordinator: NextRoundsViewControllerDelegate {
     func openNextRound(with id: Int, from viewController: UIViewController) {
-        let numberSelectionViewController = NumberSelectionViewController(with: NumberSelectionViewModel(greekKinoRoundId: id), coordinator: self)
+        let numberSelectionViewController = NumberSelectionViewController(with: NumberSelectionViewModel(greekKinoRoundId: id), delegate: self)
         viewController.navigationController?.pushViewController(numberSelectionViewController, animated: true)
+    }
+}
+
+extension MainCoordinator: NumberSelectionViewControllerDelegate {
+    func checkout(from viewController: UIViewController) {
+        viewController.showInfoAlert(message: Localized.General.missingFeature)
     }
 }
 
@@ -110,7 +116,6 @@ extension MainCoordinator: NextRoundsViewControllerDelegate {
 
 extension MainCoordinator: ResultsViewControllerDelegate {
     func openPreviousRound(with id: Int, from viewController: UIViewController) {
-        let numberSelectionViewController = NumberSelectionViewController(with: NumberSelectionViewModel(greekKinoRoundId: id), coordinator: self)
-        viewController.navigationController?.pushViewController(numberSelectionViewController, animated: true)
+        viewController.showInfoAlert(message: Localized.General.missingFeature)
     }
 }

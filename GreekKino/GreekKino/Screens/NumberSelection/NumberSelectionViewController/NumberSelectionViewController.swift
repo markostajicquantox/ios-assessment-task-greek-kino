@@ -7,6 +7,10 @@
 import UIKit
 import Combine
 
+protocol NumberSelectionViewControllerDelegate: AnyObject {
+    func checkout(from viewController: UIViewController)
+}
+
 class NumberSelectionViewController: UIViewController {
     @IBOutlet private weak var collectionView: UICollectionView!
     @IBOutlet private weak var selectedItemLabel: UILabel!
@@ -21,7 +25,7 @@ class NumberSelectionViewController: UIViewController {
     
     // MARK: - Private properties
     
-    private weak var coordinator: MainCoordinator?
+    private weak var delegate: NumberSelectionViewControllerDelegate?
     private var viewModel: NumberSelectionViewModel
     private var randomSelectionButton: PickerButton<RandomSelectionElement>!
     private var stakeSelectionButton: PickerButton<CashStake>!
@@ -39,14 +43,18 @@ class NumberSelectionViewController: UIViewController {
     
     // MARK: - Initialization
 
-    init(with viewModel: NumberSelectionViewModel, coordinator: MainCoordinator?) {
+    init(with viewModel: NumberSelectionViewModel, delegate: NumberSelectionViewControllerDelegate?) {
         self.viewModel = viewModel
-        self.coordinator = coordinator
+        self.delegate = delegate
         super.init(nibName: nil, bundle: nil)
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    deinit {
+        cancellables.forEach { $0.cancel() }
     }
     
     // MARK: - Lifecycle
@@ -69,8 +77,7 @@ class NumberSelectionViewController: UIViewController {
     // MARK: - Private actions
 
     @IBAction private func checkoutAction(_ sender: Any) {
-        let webViewVC = WebViewController(url: GKConstants.drawLink)
-        self.navigationController?.pushViewController(webViewVC, animated: true)
+        delegate?.checkout(from: self)
     }
     
     @IBAction func clearSelectionAction(_ sender: Any) {
@@ -190,9 +197,7 @@ class NumberSelectionViewController: UIViewController {
         checkoutButton.backgroundColor = .highlight
         checkoutButton.setTitle(Localized.NumberSelection.checkout, for: .normal)
     }
-    
-    
-        
+ 
     private func setItemsSelectAction() {
         for (index, _) in items.enumerated() {
             items[index].onSelect = { [weak self] in
@@ -246,10 +251,14 @@ class NumberSelectionViewController: UIViewController {
     }
         
     private func setupCollectionView() {
-        let layout = NumberSelectionViewFlowLayout(customInsets: UIEdgeInsets(top: 2, left: 2, bottom: 2, right: 2), numberOfColumns: 10, interitemSpacing: 2)
+        let layout = NumberSelectionViewFlowLayout(
+            customInsets: LayoutConstants.customInsets,
+            numberOfColumns: LayoutConstants.numberOfColumns,
+            interitemSpacing: LayoutConstants.interitemSpacing
+        )
         collectionView.collectionViewLayout = layout
-        collectionView.delegate = self
         collectionView.backgroundColor = .white
+        collectionView.delegate = self
         collectionView.register(cellType: NumberSelectionCollectionViewCell.self)
     }
 

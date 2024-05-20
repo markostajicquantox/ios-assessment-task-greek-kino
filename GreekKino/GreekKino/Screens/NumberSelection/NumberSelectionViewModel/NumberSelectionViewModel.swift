@@ -15,7 +15,7 @@ class NumberSelectionViewModel {
     private var greekKinoRound: GreekKinoRound?
     private let infoTitleSubject = CurrentValueSubject<String?, Never>(nil)
     private let startTimeSubject = CurrentValueSubject<String?, Never>(nil)
-    private let errorSubject = CurrentValueSubject<String?, Never>(nil)
+    private let errorSubject = PassthroughSubject<String?, Never>()
     private let oddSubject = CurrentValueSubject<Double?, Never>(nil)
     private let prizeSubject = CurrentValueSubject<Double?, Never>(nil)
     private let remainingTimeSubject = CurrentValueSubject<Int?, Never>(nil)
@@ -55,6 +55,10 @@ class NumberSelectionViewModel {
         self.apiService = apiService
     }
     
+    deinit {
+        timer?.invalidate()
+    }
+    
     // MARK: - Private methods
 
     private func configureTimer(with drawTime: TimeInterval) {
@@ -81,22 +85,14 @@ class NumberSelectionViewModel {
                 self?.startTimeSubject.value = Date(timeIntervalSince1970: round.drawTime/1000).toHourMinuteString()
                 self?.configureTimer(with: round.drawTime)
             case .failure(let error):
-                self?.errorSubject.value = error.localizedDescription
+                self?.errorSubject.send(error.localizedDescription)
             }
         }
     }
     
     func setStake(_ stake: Double?, selectedNumbersCount: Int) {
         guard let stake = stake else {
-            if let odd = GKConstants.odds.first(where: { $0.number == selectedNumbersCount }) {
-                self.oddSubject.value = odd.odd
-            } else if selectedNumbersCount != 0 {
-                let combinationCount = CombinationCalculator(n: selectedNumbersCount, k: GKConstants.odds.count).combinations()
-                if let maxOdd = GKConstants.odds.compactMap({ $0.odd }).max() {
-                    let odd = maxOdd / combinationCount
-                    self.oddSubject.value = odd
-                }
-            }
+            updateOdds(for: selectedNumbersCount)
             return
         }
        
@@ -107,15 +103,31 @@ class NumberSelectionViewModel {
             self.oddSubject.value = odd.odd
             self.prizeSubject.value = odd.odd * stake
         } else {
-            let combinationCount = CombinationCalculator(n: selectedNumbersCount, k: GKConstants.odds.count).combinations()
-            guard let maxOdd = GKConstants.odds.compactMap({ $0.odd }).max() else {
-                self.prizeSubject.value = nil
-                self.oddSubject.value = nil
-                return
-            }
-            let odd = maxOdd / combinationCount
-            self.oddSubject.value = odd
-            self.prizeSubject.value = odd * stake
+            calculateCombinationOdds(for: selectedNumbersCount, stake: stake)
         }
+    }
+    
+    private func updateOdds(for selectedNumbersCount: Int) {
+        if let odd = GKConstants.odds.first(where: { $0.number == selectedNumbersCount }) {
+            self.oddSubject.value = odd.odd
+        } else if selectedNumbersCount != 0 {
+            let combinationCount = CombinationCalculator(n: selectedNumbersCount, k: GKConstants.odds.count).combinations()
+            if let maxOdd = GKConstants.odds.compactMap({ $0.odd }).max() {
+                let odd = maxOdd / combinationCount
+                self.oddSubject.value = odd
+            }
+        }
+    }
+
+    private func calculateCombinationOdds(for selectedNumbersCount: Int, stake: Double) {
+        let combinationCount = CombinationCalculator(n: selectedNumbersCount, k: GKConstants.odds.count).combinations()
+        guard let maxOdd = GKConstants.odds.compactMap({ $0.odd }).max() else {
+            self.prizeSubject.value = nil
+            self.oddSubject.value = nil
+            return
+        }
+        let odd = maxOdd / combinationCount
+        self.oddSubject.value = odd
+        self.prizeSubject.value = odd * stake
     }
 }

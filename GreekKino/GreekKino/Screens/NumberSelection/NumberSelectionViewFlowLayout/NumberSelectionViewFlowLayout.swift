@@ -33,7 +33,6 @@ class NumberSelectionViewFlowLayout: UICollectionViewFlowLayout {
         guard let collectionView = collectionView else { return }
         
         let availableWidth = collectionView.bounds.width - customInsets.left - customInsets.right
-        
         let itemWidth = (availableWidth - (numberOfColumns - 1) * interitemSpacing) / numberOfColumns
         
         itemSize = CGSize(width: itemWidth, height: itemWidth)

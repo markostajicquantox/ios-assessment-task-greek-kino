@@ -21,6 +21,13 @@ class NumberSelectionCollectionViewCell: UICollectionViewCell {
         setupViews()
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        numberLabel.text = nil
+        containerView.backgroundColor = .clear
+        containerView.layer.borderColor = UIColor.clear.cgColor
+    }
+
     // MARK: - Private methods
 
     private func setupViews() {

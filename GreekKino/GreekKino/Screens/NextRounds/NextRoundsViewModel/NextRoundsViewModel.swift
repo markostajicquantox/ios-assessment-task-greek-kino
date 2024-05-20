@@ -11,9 +11,9 @@ class NextRoundsViewModel {
 
     // MARK: - Private properties
     
-    private let refreshControlSubject = CurrentValueSubject<Bool?, Never>(nil)
+    private let refreshControlSubject = PassthroughSubject<Bool?, Never>()
     private let nextRoundsSubject = CurrentValueSubject<[NextRoundCellItem]?, Never>(nil)
-    private let errorSubject = CurrentValueSubject<String?, Never>(nil)
+    private let errorSubject = PassthroughSubject<String?, Never>()
     private let apiService: APIServiceProtocol
 
     // MARK: - Public properties
@@ -41,12 +41,12 @@ class NextRoundsViewModel {
     func fetchData() {
         let url = "https://api.opap.gr/draws/v3.0/1100/upcoming/20"
         apiService.fetchData(from: url) { [weak self] (result: Result<[GreekKinoRound], Error>) in
-            self?.refreshControlSubject.value = true
+            self?.refreshControlSubject.send(true)
             switch result {
             case .success(let rounds):
                 self?.nextRoundsSubject.value = rounds.compactMap { NextRoundCellItem(id: $0.drawId, time: $0.drawTime, startTime: Date(timeIntervalSince1970: $0.drawTime/1000).toHourMinuteString() , remainingTime: Int($0.drawTime/1000 - Date().timeIntervalSince1970)) }
             case .failure(let error):
-                self?.errorSubject.value = error.localizedDescription
+                self?.errorSubject.send(error.localizedDescription)
             }
         }
     }
