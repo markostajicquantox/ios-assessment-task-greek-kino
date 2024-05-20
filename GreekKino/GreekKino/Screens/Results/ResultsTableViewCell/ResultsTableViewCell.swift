@@ -22,6 +22,7 @@ class ResultsTableViewCell: UITableViewCell {
         selectionStyle = .none
         setupViews()
         setupCollectionView()
+        configureDataSource()
     }
         
     // MARK: - Private methods
@@ -37,7 +38,11 @@ class ResultsTableViewCell: UITableViewCell {
     }
     
     private func setupCollectionView() {
-        let layout = NumberSelectionViewFlowLayout(customInsets: UIEdgeInsets(top: 2, left: 2, bottom: 2, right: 2), numberOfColumns: 10, interitemSpacing: 2)
+        let layout = NumberSelectionViewFlowLayout(
+            customInsets: LayoutConstants.customInsets,
+            numberOfColumns: LayoutConstants.numberOfColumns,
+            interitemSpacing: LayoutConstants.interitemSpacing
+        )
         collectionView.collectionViewLayout = layout
         collectionView.backgroundColor = .white
         collectionView.register(cellType: NumberSelectionCollectionViewCell.self)
@@ -67,24 +72,28 @@ class ResultsTableViewCell: UITableViewCell {
     
     private func adjustCollectionViewHeight() {
         guard let layout = collectionView.collectionViewLayout as? NumberSelectionViewFlowLayout else { return }
-        
+
         let numberOfItems = collectionView.numberOfItems(inSection: 0)
-        let numberOfRows = ceil(CGFloat(numberOfItems) / layout.numberOfColumns)
+        guard numberOfItems > 0 else {
+            collectionViewHeightConstraint.constant = 0
+            collectionView.layoutIfNeeded()
+            return
+        }
         
+        let numberOfRows = ceil(CGFloat(numberOfItems) / layout.numberOfColumns)
         let itemHeight = layout.itemSize.height
         let totalVerticalSpacing = layout.minimumLineSpacing * (numberOfRows - 1)
         let totalHeight = (itemHeight * numberOfRows) + totalVerticalSpacing + layout.customInsets.top + layout.customInsets.bottom
-        
+
         collectionViewHeightConstraint.constant = totalHeight
         collectionView.layoutIfNeeded()
     }
-    
+
     // MARK: - Public methods
 
     func configure(with item: ResultItem) {
         timeAndRoundLabel.text = Localized.Results.time + " \(item.startTime) | " + Localized.Results.round + " \(item.id)"
         self.items = item.winningNumbers.map { NumberSelectionItem(number: $0, isSelected: true, onSelect: nil) }
-        configureDataSource()
         updateDataSource()
     }
 }

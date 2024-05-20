@@ -19,7 +19,6 @@ class ResultsViewController: UIViewController {
     private weak var delegate: ResultsViewControllerDelegate?
     private var viewModel: ResultsViewModel
     private var dataSource: UITableViewDiffableDataSource<Int, ResultItem>!
-    private var timer: Timer?
     private var resultItems: [ResultItem] = []
     private var refreshControl = UIRefreshControl()
     private var cancellables = Set<AnyCancellable>()
@@ -34,6 +33,10 @@ class ResultsViewController: UIViewController {
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    deinit {
+        cancellables.forEach { $0.cancel() }
     }
 
     // MARK: - Lifecycle
@@ -118,5 +121,15 @@ class ResultsViewController: UIViewController {
     private func fetchData() {
         showActivityIndicator(style: .large, color: .highlight)
         viewModel.fetchData(for: Date().toResultsFormatDateString())
+    }
+}
+
+// MARK: - UITableViewDelegate
+
+extension ResultsViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let item = dataSource.itemIdentifier(for: indexPath) else { return }
+        
+        delegate?.openPreviousRound(with: item.id, from: self)
     }
 }

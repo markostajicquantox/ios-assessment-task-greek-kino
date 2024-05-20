@@ -38,6 +38,17 @@
         }
       }
     },
+    "MissingFeature" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This feature is yet to be added."
+          }
+        }
+      }
+    },
     "NextRounds" : {
       "extractionState" : "manual",
       "localizations" : {

@@ -110,28 +110,28 @@
             filePath = "GreekKino/Screens/NextRounds/NextRoundsViewController/NextRoundsViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "82"
-            endingLineNumber = "82"
+            startingLineNumber = "87"
+            endingLineNumber = "87"
             landmarkName = "bindViewModel()"
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "93103AAA-B78C-45C2-BFBE-96D9415DAEF8 - 1d71c807e6094573"
+                  uuid = "93103AAA-B78C-45C2-BFBE-96D9415DAEF8 - ee796e7cc07eeb55"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "GreekKino.NextRoundsViewController.setupViews() -&gt; ()"
+                  symbolName = "GreekKino.NextRoundsViewController.setupTableView() -&gt; ()"
                   moduleName = "GreekKino"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/markostajic/Desktop/ios-assessment-task-greek-kino/GreekKino/GreekKino/Screens/NextRounds/NextRoundsViewController/NextRoundsViewController.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "82"
-                  endingLineNumber = "82"
-                  offsetFromSymbolStart = "40">
+                  startingLineNumber = "87"
+                  endingLineNumber = "87"
+                  offsetFromSymbolStart = "68">
                </Location>
                <Location
-                  uuid = "93103AAA-B78C-45C2-BFBE-96D9415DAEF8 - aaeec4d5ab49edf1"
+                  uuid = "93103AAA-B78C-45C2-BFBE-96D9415DAEF8 - aaeec4d5ab49ee4c"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -141,8 +141,8 @@
                   urlString = "file:///Users/markostajic/Desktop/ios-assessment-task-greek-kino/GreekKino/GreekKino/Screens/NextRounds/NextRoundsViewController/NextRoundsViewController.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "82"
-                  endingLineNumber = "82"
+                  startingLineNumber = "87"
+                  endingLineNumber = "87"
                   offsetFromSymbolStart = "292">
                </Location>
             </Locations>

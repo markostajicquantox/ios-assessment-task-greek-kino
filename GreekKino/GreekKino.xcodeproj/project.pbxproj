@@ -68,6 +68,7 @@
 		4D670BFA2BF9B66700527B58 /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D670BF92BF9B66700527B58 /* Style.swift */; };
 		4D670BFD2BF9E5CB00527B58 /* CombinationCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D670BFC2BF9E5CB00527B58 /* CombinationCalculator.swift */; };
 		4D9C27012BFA4C09003A3396 /* NumberSelectionViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9C27002BFA4C09003A3396 /* NumberSelectionViewModelTests.swift */; };
+		4D9C27042BFAE2D8003A3396 /* LayoutConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9C27032BFAE2D8003A3396 /* LayoutConstants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -141,6 +142,7 @@
 		4D670BF92BF9B66700527B58 /* Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Style.swift; sourceTree = "<group>"; };
 		4D670BFC2BF9E5CB00527B58 /* CombinationCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombinationCalculator.swift; sourceTree = "<group>"; };
 		4D9C27002BFA4C09003A3396 /* NumberSelectionViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberSelectionViewModelTests.swift; sourceTree = "<group>"; };
+		4D9C27032BFAE2D8003A3396 /* LayoutConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutConstants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -376,6 +378,7 @@
 			isa = PBXGroup;
 			children = (
 				4D3F8B8F2BF6A9AC0019C0A1 /* NumberSelectionViewFlowLayout.swift */,
+				4D9C27032BFAE2D8003A3396 /* LayoutConstants.swift */,
 			);
 			path = NumberSelectionViewFlowLayout;
 			sourceTree = "<group>";
@@ -722,6 +725,7 @@
 				4D3F8B7D2BF649CA0019C0A1 /* ResponseModels.swift in Sources */,
 				4D3F8BB62BF6FFF00019C0A1 /* NumberSelectionViewController.swift in Sources */,
 				4D3F8B9B2BF6D29D0019C0A1 /* GKConstants.swift in Sources */,
+				4D9C27042BFAE2D8003A3396 /* LayoutConstants.swift in Sources */,
 				4D3F8BC52BF715150019C0A1 /* ResultsViewController.swift in Sources */,
 				4D3F8B9D2BF6DC680019C0A1 /* NumberSelectionViewModel.swift in Sources */,
 				4D3F8B822BF657900019C0A1 /* NextRoundTableViewCell.swift in Sources */,

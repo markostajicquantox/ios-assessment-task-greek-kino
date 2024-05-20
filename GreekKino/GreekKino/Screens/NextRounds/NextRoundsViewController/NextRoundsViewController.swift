@@ -32,6 +32,11 @@ class NextRoundsViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
     }
     
+    deinit {
+        timer?.invalidate()
+        cancellables.forEach { $0.cancel() }
+    }
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

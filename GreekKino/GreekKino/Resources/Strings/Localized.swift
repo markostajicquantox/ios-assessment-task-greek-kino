@@ -51,5 +51,6 @@ enum Localized {
     enum General {
         static let error = String(localized: "Error")
         static let ok = String(localized: "Ok")
+        static let missingFeature = String(localized: "MissingFeature")
     }
 }
